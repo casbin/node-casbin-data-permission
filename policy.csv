@@ -1,0 +1,4 @@
+p, alice, data1, read
+p, bob, data2, write
+g, alice, admin
+g, bob, user
