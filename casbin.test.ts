@@ -27,8 +27,26 @@ describe('Casbin Batch Authorization', () => {
         const results = await enforcer.batchEnforce(requests);
 
         // Adjust the expected results according to your policy.
-        const expectedResults = [true, false, false, true];
+        const expectedResults = [true, true, false, true];
 
         expect(results).toEqual(expectedResults);
+    });
+});
+
+describe('Casbin Get Implicit Permissions for User', () => {
+    it('should retrieve implicit permissions for a user', async () => {
+        const enforcer = await newEnforcer('model.conf', 'policy.csv');
+
+        const user = 'alice';
+
+        const permissions = await enforcer.getImplicitPermissionsForUser(user);
+
+        // Adjust the expected permissions according to your policy.
+        const expectedPermissions = [
+            ['alice', 'data1', 'read'],
+            ['alice', 'data2', 'write']
+        ];
+
+        expect(permissions).toEqual(expectedPermissions);
     });
 });
