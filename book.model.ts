@@ -28,6 +28,7 @@ Book.init(
     {
         tableName: 'books',
         sequelize,
+        underscored: true,
     }
 );
 

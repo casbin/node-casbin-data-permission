@@ -1,8 +1,35 @@
 import {Enforcer, newEnforcer} from 'casbin';
 import { Book } from './book.model';
 import { sequelize } from './sequelize-setup';
+import { Op } from 'sequelize';
 import { getAllowedObjectConditions } from './casbin-data';
-import { conditionsToSequelizeQuery, CombineType } from './casbin-query';
+import {conditionsToSequelizeQuery, CombineType, parseCondition} from './casbin-query';
+
+describe('parseCondition', () => {
+    test('should parse "price < 25" condition', () => {
+        const input = 'price < 25';
+        const expectedOutput = {
+            price: {
+                [Op.lt]: 25,
+            },
+        };
+
+        const result = parseCondition(input);
+        expect(result).toEqual(expectedOutput);
+    });
+
+    test('should parse "category_id = 2" condition', () => {
+        const input = 'category_id = 2';
+        const expectedOutput = {
+            category_id: {
+                [Op.eq]: 2,
+            },
+        };
+
+        const result = parseCondition(input);
+        expect(result).toEqual(expectedOutput);
+    });
+});
 
 describe('GetAllowedRecordsForUser', () => {
     let enforcer: Enforcer;
