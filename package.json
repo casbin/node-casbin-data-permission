@@ -8,7 +8,11 @@
     "start": "ts-node index.ts"
   },
   "dependencies": {
-    "casbin": "^5.6.1"
+    "@types/sequelize": "^4.28.15",
+    "casbin": "^5.26.1",
+    "sequelize": "^6.31.1",
+    "sequelize-typescript": "^2.1.5",
+    "sqlite3": "^5.1.6"
   },
   "devDependencies": {
     "@types/jest": "^29.5.1",

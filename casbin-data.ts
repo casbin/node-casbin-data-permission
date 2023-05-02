@@ -1,4 +1,5 @@
 import {Enforcer} from "casbin";
+import { Sequelize, Model, DataTypes } from 'sequelize';
 
 class ErrObjCondition extends Error {
   constructor() {
